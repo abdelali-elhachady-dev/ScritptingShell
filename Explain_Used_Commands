@@ -1,0 +1,31 @@
+awk: This is a command in Linux that processes a file line by line. It’s used to perform operations (calculations, filtering, etc.) on each line of the file.
+seen[$0]:
+
+"seen" : is an associative array (think of it like a dictionary in Python).
+
+"$0" : refers to the entire line that awk reads from the file.
+
+So, "seen[$0]" : means: "Check the seen array and see if this line ($0) already existe in it .
+"!seen[$0]++":
+
+"seen[$0]": returns 0 (false) if the line hasn’t been seen before (it’s not already in seen).
+
+The "!": (NOT operator) converts 0 to 1 (true), so it says: "Ah, this line hasn’t been seen before, so print it."
+
+The "++" : increments seen[$0] by 1, so if the same line comes up again, seen[$0] will be 1 (true), and !seen[$0] will be 0 (false), so it won’t print it again.
+Example:
+
+Copy
+line1                     
+line2         ---->            in our cas we dont have {line1 line 2...} we have complet line from complet text                      
+line1
+line3
+"The process" :
+
+line1: seen["line1"] doesn’t exist yet, so !seen["line1"]++ → true, print line1, and increment seen["line1"] to 1.
+
+line2: seen["line2"] doesn’t exist yet, so !seen["line2"]++ → true, print line2, and increment seen["line2"] to 1.
+
+line1: seen["line1"] already exists (1), so !seen["line1"]++ → false, so it doesn’t print it again.
+
+line3: seen["line3"] doesn’t exist yet, so !seen["line3"]++ → true, print line3, and increment seen["line3"] to 1.
